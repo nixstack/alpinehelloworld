@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # using custom image, see .circleci/images/primary/Dockerfile
+      - image: image: circleci/ruby:2.4.1
+    steps:
+       - checkout
+       - run: echo "A first hello"
