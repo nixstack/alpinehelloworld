@@ -70,7 +70,18 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
-          # docker tag image $IMAGE_ID:$VERSION
-          # docker push $IMAGE_ID:$VERSION
-          docker tag image registry.heroku.com/powerful-shore-44655/$PROCESS_TYPE
-          docker push registry.heroku.com/powerful-shore-44655/$PROCESS_TYPE
+          docker tag image $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+          #docker tag image registry.heroku.com/powerful-shore-44655/$PROCESS_TYPE
+          #docker push registry.heroku.com/powerful-shore-44655/$PROCESS_TYPE
+      - name: Deploy to Heroku
+        uses: AkhileshNS/heroku-deploy@v3.0.0
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "powerful-shore-44655" #Must be unique in Heroku
+          heroku_email: "1668924806@qq.com"
+          #buildpack: "SOME BUILDPACK" #OPTIONAL
+          #branch: "YOUR_BRANCH" #OPTIONAL and DEFAULT - 'HEAD' (a.k.a your current branch)
+          dontuseforce: false #OPTIONAL and DEFAULT - false
+          usedocker: false #OPTIONAL and DEFAULT - false
+
